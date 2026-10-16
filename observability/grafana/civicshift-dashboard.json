@@ -1,0 +1,31 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "HTTP requests",
+      "targets": [{ "expr": "civicshift_http_requests_total", "refId": "A" }],
+      "gridPos": { "h": 7, "w": 8, "x": 0, "y": 0 }
+    },
+    {
+      "type": "stat",
+      "title": "Registrations",
+      "targets": [{ "expr": "civicshift_registrations_total", "refId": "A" }],
+      "gridPos": { "h": 7, "w": 8, "x": 8, "y": 0 }
+    },
+    {
+      "type": "stat",
+      "title": "Data-quality violations",
+      "targets": [{ "expr": "civicshift_data_quality_violations", "refId": "A" }],
+      "gridPos": { "h": 7, "w": 8, "x": 16, "y": 0 }
+    }
+  ],
+  "schemaVersion": 41,
+  "tags": ["civicshift", "quality"],
+  "templating": { "list": [] },
+  "time": { "from": "now-1h", "to": "now" },
+  "title": "CivicShift service quality",
+  "uid": "civicshift-quality",
+  "version": 1
+}

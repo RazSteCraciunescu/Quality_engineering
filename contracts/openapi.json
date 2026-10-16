@@ -1,0 +1,693 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CivicShift API",
+    "description": "Volunteer-event booking API used by the Quality Engineering Capstone.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Health Api Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events": {
+      "get": {
+        "summary": "List Events",
+        "operationId": "list_events_api_events_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/EventResponse"
+                  },
+                  "type": "array",
+                  "title": "Response List Events Api Events Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events/{event_id}": {
+      "get": {
+        "summary": "Get Event",
+        "operationId": "get_event_api_events__event_id__get",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/registrations": {
+      "post": {
+        "summary": "Register",
+        "operationId": "register_api_registrations_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/registrations/{registration_id}": {
+      "get": {
+        "summary": "Get Registration",
+        "operationId": "get_registration_api_registrations__registration_id__get",
+        "parameters": [
+          {
+            "name": "registration_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Registration Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/registrations/{registration_id}/cancel": {
+      "post": {
+        "summary": "Cancel Registration",
+        "operationId": "cancel_registration_api_registrations__registration_id__cancel_post",
+        "parameters": [
+          {
+            "name": "registration_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Registration Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quality/generate-scenarios": {
+      "post": {
+        "summary": "Quality Scenarios",
+        "operationId": "quality_scenarios_api_quality_generate_scenarios_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScenarioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScenarioResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quality/snapshot": {
+      "get": {
+        "summary": "Quality Snapshot",
+        "operationId": "quality_snapshot_api_quality_snapshot_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Quality Snapshot Api Quality Snapshot Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "summary": "Metrics",
+        "operationId": "metrics_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EventResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "location": {
+            "type": "string",
+            "title": "Location"
+          },
+          "starts_at": {
+            "type": "string",
+            "title": "Starts At"
+          },
+          "capacity": {
+            "type": "integer",
+            "title": "Capacity"
+          },
+          "minimum_age": {
+            "type": "integer",
+            "title": "Minimum Age"
+          },
+          "status": {
+            "type": "string",
+            "const": "published",
+            "title": "Status"
+          },
+          "confirmed_count": {
+            "type": "integer",
+            "title": "Confirmed Count"
+          },
+          "waitlist_count": {
+            "type": "integer",
+            "title": "Waitlist Count"
+          },
+          "remaining_seats": {
+            "type": "integer",
+            "title": "Remaining Seats"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "slug",
+          "title",
+          "summary",
+          "location",
+          "starts_at",
+          "capacity",
+          "minimum_age",
+          "status",
+          "confirmed_count",
+          "waitlist_count",
+          "remaining_seats"
+        ],
+        "title": "EventResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "RegistrationCreate": {
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 3,
+            "title": "Event Id"
+          },
+          "attendee_name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Attendee Name"
+          },
+          "attendee_email": {
+            "type": "string",
+            "maxLength": 254,
+            "minLength": 5,
+            "title": "Attendee Email"
+          },
+          "attendee_age": {
+            "type": "integer",
+            "maximum": 120.0,
+            "minimum": 0.0,
+            "title": "Attendee Age"
+          },
+          "consent": {
+            "type": "boolean",
+            "title": "Consent"
+          }
+        },
+        "type": "object",
+        "required": [
+          "event_id",
+          "attendee_name",
+          "attendee_email",
+          "attendee_age",
+          "consent"
+        ],
+        "title": "RegistrationCreate"
+      },
+      "RegistrationResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "event_id": {
+            "type": "string",
+            "title": "Event Id"
+          },
+          "attendee_name": {
+            "type": "string",
+            "title": "Attendee Name"
+          },
+          "attendee_email": {
+            "type": "string",
+            "title": "Attendee Email"
+          },
+          "attendee_age": {
+            "type": "integer",
+            "title": "Attendee Age"
+          },
+          "consent": {
+            "type": "boolean",
+            "title": "Consent"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "waitlisted",
+              "cancelled"
+            ],
+            "title": "Status"
+          },
+          "idempotency_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idempotency Key"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "title": "Updated At"
+          },
+          "replayed": {
+            "type": "boolean",
+            "title": "Replayed",
+            "default": false
+          },
+          "promoted_registration_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Promoted Registration Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "event_id",
+          "attendee_name",
+          "attendee_email",
+          "attendee_age",
+          "consent",
+          "status",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "RegistrationResponse"
+      },
+      "Scenario": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 180,
+            "minLength": 5,
+            "title": "Title"
+          },
+          "technique": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 3,
+            "title": "Technique"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ],
+            "title": "Priority"
+          },
+          "steps": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Steps"
+          },
+          "expected": {
+            "type": "string",
+            "maxLength": 600,
+            "minLength": 5,
+            "title": "Expected"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "technique",
+          "priority",
+          "steps",
+          "expected",
+          "tags"
+        ],
+        "title": "Scenario"
+      },
+      "ScenarioRequest": {
+        "properties": {
+          "requirement": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 20,
+            "title": "Requirement"
+          },
+          "risk": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "title": "Risk",
+            "default": "medium"
+          }
+        },
+        "type": "object",
+        "required": [
+          "requirement"
+        ],
+        "title": "ScenarioRequest"
+      },
+      "ScenarioResponse": {
+        "properties": {
+          "provider": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 3,
+            "title": "Provider"
+          },
+          "requirement_summary": {
+            "type": "string",
+            "maxLength": 240,
+            "minLength": 5,
+            "title": "Requirement Summary"
+          },
+          "risks_detected": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Risks Detected"
+          },
+          "scenarios": {
+            "items": {
+              "$ref": "#/components/schemas/Scenario"
+            },
+            "type": "array",
+            "maxItems": 30,
+            "minItems": 1,
+            "title": "Scenarios"
+          },
+          "review_note": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 10,
+            "title": "Review Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "provider",
+          "requirement_summary",
+          "risks_detected",
+          "scenarios",
+          "review_note"
+        ],
+        "title": "ScenarioResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

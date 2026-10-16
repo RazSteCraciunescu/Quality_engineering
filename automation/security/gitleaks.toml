@@ -1,0 +1,9 @@
+title = "CivicShift gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Reserved example domains and fake fixture identifiers"
+paths = ['''tests/fixtures/.*''', '''integrations/.*''']
+regexes = ['''example\.test''', '''example\.invalid''']

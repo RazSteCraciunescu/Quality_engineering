@@ -1,0 +1,35 @@
+{
+  "project": { "key": "CIV", "name": "CivicShift (fictional)" },
+  "issues": [
+    {
+      "key": "CIV-101",
+      "type": "Story",
+      "summary": "Wait-list volunteers when event capacity is reached",
+      "status": "Done",
+      "acceptanceCriteria": [
+        "Confirmed registrations never exceed event capacity",
+        "The next eligible registration is wait-listed when no place remains",
+        "Capacity status is visible on the public event card"
+      ],
+      "labels": ["booking", "risk-high"]
+    },
+    {
+      "key": "CIV-117",
+      "type": "Bug",
+      "summary": "Wait-list promotion can ignore arrival order",
+      "status": "Closed",
+      "severity": "High",
+      "linkedRequirement": "FR-07",
+      "evidence": "docs/defects/BUG-017-waitlist-order.md"
+    },
+    {
+      "key": "CIV-121",
+      "type": "Bug",
+      "summary": "Rate-limit response omits Retry-After header",
+      "status": "Closed",
+      "severity": "Medium",
+      "linkedRequirement": "NFR-03",
+      "evidence": "docs/defects/BUG-021-retry-after-header.md"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+env:
+  contexts:
+    - name: civicshift
+      urls:
+        - http://host.docker.internal:8000
+      includePaths:
+        - http://host.docker.internal:8000/.*
+      excludePaths:
+        - http://host.docker.internal:8000/api/docs.*
+  parameters:
+    failOnError: true
+    failOnWarning: false
+jobs:
+  - type: passiveScan-config
+    parameters:
+      maxAlertsPerRule: 10
+  - type: spider
+    parameters:
+      context: civicshift
+      maxDuration: 2
+  - type: passiveScan-wait
+    parameters:
+      maxDuration: 5
+  - type: report
+    parameters:
+      template: traditional-json
+      reportDir: /zap/wrk/reports/generated
+      reportFile: zap-baseline.json

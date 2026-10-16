@@ -1,0 +1,58 @@
+{
+  "info": {
+    "name": "CivicShift API quality checks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "uniqueEmail", "value": "postman-{{$timestamp}}@example.test" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/health" },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('service is healthy', () => pm.response.to.have.status(200));",
+          "pm.test('request id is present', () => pm.expect(pm.response.headers.get('X-Request-ID')).to.be.ok);"
+        ]}
+      }]
+    },
+    {
+      "name": "Create registration",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Idempotency-Key", "value": "postman-{{$timestamp}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event_id\": \"evt-park-cleanup\",\n  \"attendee_name\": \"Postman Volunteer\",\n  \"attendee_email\": \"{{uniqueEmail}}\",\n  \"attendee_age\": 32,\n  \"consent\": true\n}"
+        },
+        "url": "{{baseUrl}}/api/registrations"
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('created', () => pm.response.to.have.status(201));",
+          "const body = pm.response.json();",
+          "pm.expect(body.id).to.match(/^reg-/);",
+          "pm.expect(['confirmed', 'waitlisted']).to.include(body.status);",
+          "pm.environment.set('registrationId', body.id);"
+        ]}
+      }]
+    },
+    {
+      "name": "Cancel registration",
+      "request": { "method": "POST", "url": "{{baseUrl}}/api/registrations/{{registrationId}}/cancel" },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('cancelled', () => pm.response.to.have.status(200));",
+          "pm.expect(pm.response.json().status).to.eql('cancelled');"
+        ]}
+      }]
+    }
+  ]
+}

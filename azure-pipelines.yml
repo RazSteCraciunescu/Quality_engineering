@@ -1,0 +1,45 @@
+trigger:
+  branches:
+    include: [main]
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: Test
+    jobs:
+      - job: CoreQuality
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.12'
+          - script: python -m pip install -r requirements-dev.txt
+            displayName: Install Python dependencies
+          - script: python -m pytest -m "not browser" --junitxml=reports/generated/pytest-junit.xml
+            displayName: Run core tests
+          - script: python scripts/validate_repository.py
+            displayName: Validate repository
+          - task: PublishTestResults@2
+            condition: always()
+            inputs:
+              testResultsFormat: JUnit
+              testResultsFiles: reports/generated/pytest-junit.xml
+      - job: WebQuality
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '22.x'
+          - script: npm install
+          - script: npm run build
+          - script: npm run test:unit
+
+  - stage: Package
+    dependsOn: Test
+    condition: succeeded()
+    jobs:
+      - job: Container
+        steps:
+          - script: docker build -t civicshift:$(Build.BuildId) .
+          - script: docker save civicshift:$(Build.BuildId) -o $(Build.ArtifactStagingDirectory)/civicshift.tar
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: container-image

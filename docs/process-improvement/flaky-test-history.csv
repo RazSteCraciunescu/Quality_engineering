@@ -1,0 +1,11 @@
+week,total_executions,flaky_executions,rate_percent,dominant_cause
+1,620,56,9.03,fixed_waits
+2,645,52,8.06,shared_data
+3,638,55,8.62,fixed_waits
+4,670,48,7.16,environment_readiness
+5,688,31,4.51,shared_data
+6,701,20,2.85,time_dependency
+7,715,12,1.68,time_dependency
+8,724,10,1.38,isolated_cases
+9,730,9,1.23,isolated_cases
+10,742,11,1.48,isolated_cases

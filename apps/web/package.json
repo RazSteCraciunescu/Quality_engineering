@@ -1,0 +1,11 @@
+{
+  "name": "@civicshift/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ../../scripts/build_web.mjs",
+    "test": "node --test ../../tests/node/*.test.mjs",
+    "lint": "node ../../scripts/check_web.mjs"
+  }
+}

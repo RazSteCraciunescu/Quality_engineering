@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: civicshift-config
+  namespace: civicshift
+data:
+  CIVICSHIFT_ENV: kubernetes
+  CIVICSHIFT_DB: /app/var/civicshift.db
+  CIVICSHIFT_AI_PROVIDER: rules
+  CIVICSHIFT_RATE_LIMIT_PER_MINUTE: "30"

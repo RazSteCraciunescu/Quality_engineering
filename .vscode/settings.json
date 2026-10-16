@@ -1,0 +1,11 @@
+{
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": ["services/api/tests", "tests"],
+  "editor.formatOnSave": true,
+  "files.eol": "\n",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.venv": true,
+    "**/reports/generated": true
+  }
+}

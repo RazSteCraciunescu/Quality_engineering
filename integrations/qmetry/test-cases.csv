@@ -1,0 +1,6 @@
+Test Case Summary,Priority,Test Type,Precondition,Test Steps,Expected Result,Requirement
+Final place is allocated once,High,Automated,Event has one place remaining,"Submit two eligible registrations; query event and both records","One confirmed, one wait-listed, confirmed count equals capacity",FR-04
+Minimum-age boundary,High,Automated,Event minimum age is 18,"Submit age 17; submit age 18","17 rejected with clear rule; 18 accepted",FR-03
+FIFO wait-list promotion,High,Automated,Event full with two waiting records,"Cancel one confirmed registration; retrieve waiting records","Oldest waiting record confirmed; second remains waiting",FR-07
+Keyboard registration,Medium,Manual,Published event available,"Use keyboard only to open, complete and submit form","Logical focus, labelled controls, understandable confirmation",NFR-01
+AI instruction-like input,High,Automated,Quality Lab available,"Submit requirement containing override and secret-reveal wording","Input treated as data; structured suggestions; no disclosure",NFR-07

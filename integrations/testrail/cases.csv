@@ -1,0 +1,6 @@
+Section,Title,Type,Priority,References,Automation
+Registration,Eligible volunteer reserves available place,Functional,Critical,FR-02;FR-04,services/api/tests/test_api.py
+Registration,Duplicate email is rejected,Regression,High,FR-05,services/api/tests/test_api.py
+Wait-list,Cancellation promotes oldest waiting user,Functional,Critical,FR-07,services/api/tests/test_business_rules.py
+Accessibility,Registration is keyboard operable,Accessibility,High,NFR-01,tests/accessibility/accessibility.spec.ts
+Security,Untrusted origin is not reflected,Security,High,NFR-03,tests/security/test_security_controls.py

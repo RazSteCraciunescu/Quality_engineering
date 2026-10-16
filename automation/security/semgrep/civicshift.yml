@@ -1,0 +1,19 @@
+rules:
+  - id: python-sql-string-format
+    languages: [python]
+    severity: ERROR
+    message: Keep SQL parameterized; do not construct queries with f-strings.
+    patterns:
+      - pattern: $CURSOR.execute(f"...{$VALUE}...")
+  - id: unsafe-inner-html
+    languages: [javascript, typescript]
+    severity: WARNING
+    message: Review untrusted data before assigning innerHTML.
+    pattern: $ELEMENT.innerHTML = $VALUE
+    metadata:
+      note: Generated static output is excluded; maintainable source should avoid direct HTML sinks.
+  - id: subprocess-shell-true
+    languages: [python]
+    severity: ERROR
+    message: Avoid shell=True for repository automation.
+    pattern: subprocess.$FUNC(..., shell=True, ...)

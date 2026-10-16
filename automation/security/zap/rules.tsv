@@ -1,0 +1,4 @@
+# rule_id	action	comment
+10020	IGNORE	X-Frame-Options is validated by API security tests and CSP frame-ancestors.
+10021	IGNORE	CSP is validated by API security tests.
+10038	WARN	Review CSP directives manually when new third-party assets are introduced.

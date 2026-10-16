@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="civicshift-validated-baseline" tests="74" failures="0" errors="0" skipped="0" time="2.17">
+  <testsuite name="python-api-security-data-ai" tests="70" failures="0" errors="0" skipped="0" time="1.11" />
+  <testsuite name="typescript-web-unit" tests="3" failures="0" errors="0" skipped="0" time="0.06" />
+  <testsuite name="chromium-booking-smoke" tests="1" failures="0" errors="0" skipped="0" time="1.00" />
+</testsuites>

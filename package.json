@@ -1,0 +1,33 @@
+{
+  "name": "civicshift-quality-engineering-capstone",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-spectrum quality engineering capstone around a volunteer-event booking service.",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @civicshift/web",
+    "test": "npm run test:node && npm run test:python",
+    "test:node": "npm run build && node --test tests/node/*.test.mjs",
+    "test:python": "python -m pytest -m \"not browser\"",
+    "test:e2e": "playwright test tests/e2e tests/accessibility",
+    "test:gherkin": "cucumber-js --config cucumber.cjs",
+    "lint:web": "node scripts/check_web.mjs",
+    "lint:python": "python -m ruff check .",
+    "validate": "python scripts/validate_repository.py",
+    "start:api": "python -m uvicorn services.api.civicshift.main:app --host 127.0.0.1 --port 8000",
+    "start": "npm run build && npm run start:api",
+    "test:unit": "node --test tests/node/*.test.mjs",
+    "lint": "npm run lint:web"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@cucumber/cucumber": "11.3.0",
+    "@playwright/test": "1.55.0",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

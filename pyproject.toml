@@ -1,0 +1,52 @@
+[project]
+name = "civicshift-quality-engineering-capstone"
+version = "1.0.0"
+description = "A full-spectrum quality engineering capstone around a volunteer-event booking service."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi==0.116.1",
+  "httpx==0.28.1",
+  "uvicorn[standard]==0.35.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "jsonschema==4.25.1",
+  "pytest==8.4.1",
+  "pytest-cov==6.2.1",
+  "PyYAML==6.0.2",
+  "ruff==0.12.11",
+  "selenium==4.35.0",
+  "playwright==1.55.0",
+]
+mcp = ["mcp==1.13.1"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["services/api/tests", "tests"]
+markers = [
+  "api: HTTP API tests",
+  "ai: AI quality and evaluation tests",
+  "contract: OpenAPI and schema tests",
+  "data: database and data-quality tests",
+  "security: security control tests",
+  "browser: tests that require a running browser",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["reports", "apps/web/dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["B008"]
+
+[tool.coverage.run]
+source = ["services/api/civicshift"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 85

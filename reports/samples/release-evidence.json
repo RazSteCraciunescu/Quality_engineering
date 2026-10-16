@@ -1,0 +1,47 @@
+{
+  "rule_version": "1.0",
+  "decision": "PASS",
+  "findings": [],
+  "metrics": {
+    "tests": {
+      "tests": 74,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "lighthouse": {
+      "performance": 0.96,
+      "accessibility": 1.0,
+      "best-practices": 0.96,
+      "seo": 1.0
+    },
+    "security_alerts": {
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "informational": 0
+    },
+    "data_quality": {
+      "active_duplicates": 0,
+      "overbooked_events": 0
+    }
+  },
+  "sources": {
+    "junit": {
+      "file": "junit.xml",
+      "sha256": "db06c47b5b16a77a3fb8131bb1cebc4c585e10e5f09c02f23cb67a9234f77fa3"
+    },
+    "lighthouse": {
+      "file": "lighthouse.json",
+      "sha256": "138ad931044753bdd47974dd94153b631ed0131458b705b97a0bb8bb20f67d36"
+    },
+    "zap": {
+      "file": "zap.json",
+      "sha256": "2d4a8910b3064e8d2379c6ec55c57edb10253ee717aae6e1083ed85b0ff7b034"
+    },
+    "data_quality": {
+      "file": "data-quality.json",
+      "sha256": "0ed08706ce5ff4cb5e9f7479b799645b75be8f79b8133d6403403a1b095a822a"
+    }
+  }
+}

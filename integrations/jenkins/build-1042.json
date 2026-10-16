@@ -1,0 +1,30 @@
+{
+  "build": 1042,
+  "branch": "main",
+  "commit": "example-only-no-real-sha",
+  "status": "SUCCESS",
+  "durationMs": 184000,
+  "stages": [
+    {
+      "name": "Python quality",
+      "status": "SUCCESS",
+      "tests": 52,
+      "failures": 0
+    },
+    {
+      "name": "Frontend quality",
+      "status": "SUCCESS",
+      "tests": 8,
+      "failures": 0
+    },
+    {
+      "name": "Container smoke",
+      "status": "SUCCESS"
+    }
+  ],
+  "artifacts": [
+    "reports/generated/pytest-junit.xml",
+    "reports/generated/release-evidence.md"
+  ],
+  "note": "Fictional import-shaped fixture; not a historical build claim."
+}

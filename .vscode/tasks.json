@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CivicShift: run API",
+      "type": "shell",
+      "command": "python -m uvicorn services.api.civicshift.main:app --host 127.0.0.1 --port 8000",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "CivicShift: core tests",
+      "type": "shell",
+      "command": "python -m pytest -m \"not browser\"",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "CivicShift: validate repository",
+      "type": "shell",
+      "command": "python scripts/validate_repository.py",
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "CivicShift",
+  "short_name": "CivicShift",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#16243d",
+  "icons": []
+}
